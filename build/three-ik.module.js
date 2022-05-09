@@ -1,4 +1,4 @@
-import { AxesHelper, Color, ConeBufferGeometry, Math as Math$1, Matrix4, Mesh, MeshBasicMaterial, Object3D, Vector3 } from 'three';
+import { Vector3, Matrix4, Math as Math$1, Color, ConeBufferGeometry, Mesh, MeshBasicMaterial, Object3D, AxesHelper } from 'three';
 
 var t1 = new Vector3();
 var t2 = new Vector3();
@@ -7,7 +7,6 @@ var m1 = new Matrix4();
 function getWorldPosition(object, target) {
   return target.setFromMatrixPosition(object.matrixWorld);
 }
-
 function getCentroid(positions, target) {
   target.set(0, 0, 0);
   var _iteratorNormalCompletion = true;
@@ -34,8 +33,7 @@ function getCentroid(positions, target) {
   }
   target.divideScalar(positions.length);
   return target;
-}
-function setQuaternionFromDirection(direction, up, target) {
+}function setQuaternionFromDirection(direction, up, target) {
   var x = t1;
   var y = t2;
   var z = t3;
@@ -68,133 +66,6 @@ function transformPoint(vector, matrix, target) {
   target.set(x / w, y / w, z / w);
 }
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-
-
-
-
-var asyncGenerator = function () {
-  function AwaitValue(value) {
-    this.value = value;
-  }
-
-  function AsyncGenerator(gen) {
-    var front, back;
-
-    function send(key, arg) {
-      return new Promise(function (resolve, reject) {
-        var request = {
-          key: key,
-          arg: arg,
-          resolve: resolve,
-          reject: reject,
-          next: null
-        };
-
-        if (back) {
-          back = back.next = request;
-        } else {
-          front = back = request;
-          resume(key, arg);
-        }
-      });
-    }
-
-    function resume(key, arg) {
-      try {
-        var result = gen[key](arg);
-        var value = result.value;
-
-        if (value instanceof AwaitValue) {
-          Promise.resolve(value.value).then(function (arg) {
-            resume("next", arg);
-          }, function (arg) {
-            resume("throw", arg);
-          });
-        } else {
-          settle(result.done ? "return" : "normal", result.value);
-        }
-      } catch (err) {
-        settle("throw", err);
-      }
-    }
-
-    function settle(type, value) {
-      switch (type) {
-        case "return":
-          front.resolve({
-            value: value,
-            done: true
-          });
-          break;
-
-        case "throw":
-          front.reject(value);
-          break;
-
-        default:
-          front.resolve({
-            value: value,
-            done: false
-          });
-          break;
-      }
-
-      front = front.next;
-
-      if (front) {
-        resume(front.key, front.arg);
-      } else {
-        back = null;
-      }
-    }
-
-    this._invoke = send;
-
-    if (typeof gen.return !== "function") {
-      this.return = undefined;
-    }
-  }
-
-  if (typeof Symbol === "function" && Symbol.asyncIterator) {
-    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
-      return this;
-    };
-  }
-
-  AsyncGenerator.prototype.next = function (arg) {
-    return this._invoke("next", arg);
-  };
-
-  AsyncGenerator.prototype.throw = function (arg) {
-    return this._invoke("throw", arg);
-  };
-
-  AsyncGenerator.prototype.return = function (arg) {
-    return this._invoke("return", arg);
-  };
-
-  return {
-    wrap: function (fn) {
-      return function () {
-        return new AsyncGenerator(fn.apply(this, arguments));
-      };
-    },
-    await: function (value) {
-      return new AwaitValue(value);
-    }
-  };
-}();
-
-
-
-
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -218,12 +89,6 @@ var createClass = function () {
     return Constructor;
   };
 }();
-
-
-
-
-
-
 
 var get = function get(object, property, receiver) {
   if (object === null) object = Function.prototype;
@@ -266,16 +131,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -283,10 +138,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-
 
 var slicedToArray = function () {
   function sliceIterator(arr, i) {
@@ -327,8 +178,8 @@ var slicedToArray = function () {
 }();
 
 var Z_AXIS = new Vector3(0, 0, 1);
-var DEG2RAD = Math$1.DEG2RAD;
-var RAD2DEG = Math$1.RAD2DEG;
+var DEG2RAD = Math$1.DEG2RAD,
+    RAD2DEG = Math$1.RAD2DEG;
 var IKBallConstraint = function () {
   function IKBallConstraint(angle) {
     classCallCheck(this, IKBallConstraint);
@@ -555,8 +406,7 @@ var IKChain = function () {
           var distance = previousJoint._getWorldDistance(joint);
           if (distance === 0) {
             throw new Error('bone with 0 distance between adjacent bone found');
-          }
-          joint._setDistance(distance);
+          }          joint._setDistance(distance);
           joint._updateWorldPosition();
           var direction = previousJoint._getWorldDirection(joint);
           previousJoint._originalDirection = new Vector3().copy(direction);
@@ -816,7 +666,8 @@ var IK = function () {
               break;
             }
             iterations--;
-            
+            if (iterations > 0) {
+            }
           }
         }
       } catch (err) {
@@ -1005,10 +856,10 @@ var IKHelper = function (_Object3D2) {
     }
   }, {
     key: 'showBones',
-    get: function get$$1() {
+    get: function get() {
       return this._showBones;
     },
-    set: function set$$1(showBones) {
+    set: function set(showBones) {
       if (showBones === this._showBones) {
         return;
       }
@@ -1019,6 +870,7 @@ var IKHelper = function (_Object3D2) {
         for (var _iterator5 = this._meshes[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
           var _ref4 = _step5.value;
           var _ref5 = slicedToArray(_ref4, 2);
+          var joint = _ref5[0];
           var mesh = _ref5[1];
           if (showBones) {
             mesh.add(mesh.boneMesh);
@@ -1044,10 +896,10 @@ var IKHelper = function (_Object3D2) {
     }
   }, {
     key: 'showAxes',
-    get: function get$$1() {
+    get: function get() {
       return this._showAxes;
     },
-    set: function set$$1(showAxes) {
+    set: function set(showAxes) {
       if (showAxes === this._showAxes) {
         return;
       }
@@ -1058,6 +910,7 @@ var IKHelper = function (_Object3D2) {
         for (var _iterator6 = this._meshes[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
           var _ref6 = _step6.value;
           var _ref7 = slicedToArray(_ref6, 2);
+          var joint = _ref7[0];
           var mesh = _ref7[1];
           if (showAxes) {
             mesh.add(mesh.axesHelper);
@@ -1083,10 +936,10 @@ var IKHelper = function (_Object3D2) {
     }
   }, {
     key: 'wireframe',
-    get: function get$$1() {
+    get: function get() {
       return this._wireframe;
     },
-    set: function set$$1(wireframe) {
+    set: function set(wireframe) {
       if (wireframe === this._wireframe) {
         return;
       }
@@ -1097,6 +950,7 @@ var IKHelper = function (_Object3D2) {
         for (var _iterator7 = this._meshes[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
           var _ref8 = _step7.value;
           var _ref9 = slicedToArray(_ref8, 2);
+          var joint = _ref9[0];
           var mesh = _ref9[1];
           if (mesh.boneMesh.material) {
             mesh.boneMesh.material.wireframe = wireframe;
@@ -1120,10 +974,10 @@ var IKHelper = function (_Object3D2) {
     }
   }, {
     key: 'color',
-    get: function get$$1() {
+    get: function get() {
       return this._color;
     },
-    set: function set$$1(color) {
+    set: function set(color) {
       if (this._color && this._color.equals(color)) {
         return;
       }
@@ -1135,6 +989,7 @@ var IKHelper = function (_Object3D2) {
         for (var _iterator8 = this._meshes[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
           var _ref10 = _step8.value;
           var _ref11 = slicedToArray(_ref10, 2);
+          var joint = _ref11[0];
           var mesh = _ref11[1];
           if (mesh.boneMesh.material) {
             mesh.boneMesh.material.color = color;
@@ -1160,12 +1015,4 @@ var IKHelper = function (_Object3D2) {
   return IKHelper;
 }(Object3D);
 
-if (typeof window !== 'undefined' && _typeof(window.THREE) === 'object') {
-  window.THREE.IK = IK;
-  window.THREE.IKChain = IKChain;
-  window.THREE.IKJoint = IKJoint;
-  window.THREE.IKBallConstraint = IKBallConstraint;
-  window.THREE.IKHelper = IKHelper;
-}
-
-export { IK, IKChain, IKJoint, IKBallConstraint, IKHelper };
+export { IK, IKBallConstraint, IKChain, IKHelper, IKJoint };

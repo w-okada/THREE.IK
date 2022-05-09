@@ -1,5 +1,5 @@
 {
-  "name": "three-ik",
+  "name": "@dannadori/three-ik",
   "version": "0.1.0",
   "description": "inverse kinematics for three.js",
   "main": "./build/three-ik.js",
@@ -12,16 +12,16 @@
     "version": "npm run build && npm run build-demo && npm add src/* demo/* examples/*",
     "postversion": "git push && git push --tags && npm publish"
   },
-  "author": "Jordan Santell <jordan@jsantell.com>",
+  "author": "original:Jordan Santell <jordan@jsantell.com>, revised by: wataru.okada@flect.co.jp",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.24.1",
+    "babel-core": "^6.26.3",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.6.1",
-    "jsdoc": "^3.5.5",
-    "rollup": "^0.50.0",
+    "babel-preset-env": "^1.7.0",
+    "jsdoc": "^3.6.10",
+    "rollup": "^2.72.1",
     "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-cleanup": "^1.0.1",
+    "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-commonjs": "^8.2.1",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
@@ -35,6 +35,6 @@
   "peerDependencies": {
     "three": "*"
   },
-  "repository": "https://github.com/jsantell/THREE.IK",
+  "repository": "https://github.com/w-okada/THREE.IK",
   "dependencies": {}
 }
